@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Disney Plus Copy</title>
+    </head>
+    <body>
+        <!-- 
+    criar repositório github: No github faço o create repository. Depois copio o link que está no início, em "Quick setup - if you´ve done this kind of thing before"
+    
+
+    Abro o terminal no vscode. navego até a pasta que será criado o projeto.
+    ====================================================================================================================================== 
+    - clonar o repositório: git clone https://github.com/washamaral/clone_disneyplus.git (cole o repositório copiado)
+    - iniciar projeto: npm init -- yes (--yes já dá o yes em todas aquelas perguntas de criação de projeto)
+    - instalar gulp e sass: npm install --save-dev gulp gulp-sass sass
+    
+    - crio o .gitignore e adiciono a pasta node_modules
+    
+    
+
+    CONFIGURANDO O GULP
+    ======================================================================================================================================
+    - em gulpfile.js crio uma função para testar o gulp:
+    function testGulp(cb) {
+        console.log('Olá gulp');
+        cb();
+        }
+        
+        exports.default = testGulp;
+        
+    - Em package.json vou até "scripts" e adiciono o parâmetro build para executar o gulp: "build": "gulp",    
+    - No terminal rodo o seguinte comando para testar o gulp: npm run build
+    
+    CONFIGURANDO O SASS
+    ======================================================================================================================================
+    - Crio as pastas e arquivos: src/styles/main.scss
+    - gulpfile.js preciso importar o gulp e o sass. No início do arquivo colocar:
+        const gulp = require('gulp')
+        const sass = require('gulp-sass')(require('sass'))
+
+        function styles() {
+            return gulp.src('./src/styles/*.scss')   => coleta os arquivos scss na fonte
+            .pipe(sass({outputStyle: 'compressed'})) => compila os arquivos e devolve no formato comprimido
+            .pipe(gulp.dest('./dist/css'))           => salva na pasta desejada de destino.
+        }
+
+        exports.default = styles; => comando para executar a função criada acima.
+        
+        exports.watch = function () {
+            gulp.watch('./src/styles/*.scss', gulp.parallel(styles))
+        } => Esta função cria um watcher para acompanhar e executar todas as alterações que fizermos no gulp. Assim, sempre que salvar o arquivo, essa função executará o compilador automaticamente ppara que eu não precise ficar executando npm run build todas as vezes
+    - 
+
+    --></body>
+</html>
