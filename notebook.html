@@ -51,7 +51,40 @@
         exports.watch = function () {
             gulp.watch('./src/styles/*.scss', gulp.parallel(styles))
         } => Esta função cria um watcher para acompanhar e executar todas as alterações que fizermos no gulp. Assim, sempre que salvar o arquivo, essa função executará o compilador automaticamente ppara que eu não precise ficar executando npm run build todas as vezes
-    - 
 
+    - Se eu quiser deixar um comando específico para rodar o gulp adiciono esse comando no script do package.json:
+
+        "scripts": {
+            "dev": "gulp watch", => com isso posso rodar npm run dev que executará o gulp e o watch juntos.
+            "build": "gulp",
+            "test": "echo \"Error: no test specified\" && exit 1"
+        },
+    
+
+    INICIANDO OS TRABALHOS
+    ======================================================================================================================================
+    
+    - Feitas as configurações e criado o arquivo index.html para iniciar o projeto, associo ao css criado pelo gulp e podemos fazer o commit do projeto.
+
+    - git status / git add . / git commit -m "mensagem" / git push - para mandar para o github.
+
+
+    MINIFICANDO IMAGENS
+    ======================================================================================================================================
+
+    - Instalo o plugin na versão 7.1.0: npm install --save-dev gulp-imagemin@7.1.0
+    - Importo esse plugin no gulp: const imagemin = require(gulp-imagemin)
+    - Crio função para executar a minificação: 
+        function images() {
+            return gulp.src('./src/images/**/*')             => pega as imagens
+                .pipe(imagemin()).on('error', sass.logError) => minifica
+                .pipe(gulp.dest('./dist/images'));           => salva no destino
+        };                                                   => ** = todas as pastas / * = todos os arquivos
+
+    - Altero o default para pegar essa nova função também:
+        exports.default = gulp.parallel(styles, images);
+
+    
+    
     --></body>
 </html>
